@@ -24,7 +24,7 @@
       overflow: hidden;
     }
     body {
-      padding: 12px;
+      padding: 12px 12px 24px 12px; /* ✅ إضافة مسافة سفلية 24px للفصل عن الإعلان */
       font-family: system-ui, -apple-system, sans-serif;
       background: linear-gradient(135deg, #0A1630 0%, #030914 100%);
       color: var(--text-main);
@@ -33,11 +33,11 @@
       align-items: center;
     }
 
-    /* ✅ الكارت يملأ كامل ارتفاع WebView */
+    /* ✅ الكارت يملأ المساحة المتاحة بمرونة ولا يتجاوزها */
     .player-card {
       width: 100%;
       max-width: 480px;
-      height: 100%;
+      flex: 1; /* ✅ بدلاً من height: 100% لتجنب الالتصاق */
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
