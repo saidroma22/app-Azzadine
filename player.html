@@ -15,42 +15,52 @@
     }
     * { box-sizing: border-box; scrollbar-width: none; }
     *::-webkit-scrollbar { display: none; }
-    body {
+
+    /* ✅ GitHub Pages: ارتفاع ثابت = ارتفاع WebView بالكامل */
+    html, body {
       margin: 0;
-      padding: 12px 12px 12px 12px;
-      min-height: 100vh;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
+      padding: 12px;
       font-family: system-ui, -apple-system, sans-serif;
       background: linear-gradient(135deg, #0A1630 0%, #030914 100%);
       color: var(--text-main);
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      overflow-x: hidden;
     }
+
+    /* ✅ الكارت يملأ كامل ارتفاع WebView */
     .player-card {
       width: 100%;
-      max-width: 400px;
+      max-width: 480px;
+      height: 100%;
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--glass-border);
       border-bottom: 3px solid var(--primary-color);
       border-radius: 20px;
-      padding: 10px; /* تقليص من 14px */
+      padding: 10px;
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
       display: flex;
       flex-direction: column;
-      gap: 8px; /* تقليص من 12px */
+      gap: 8px;
+      overflow: hidden;
     }
+
     .player-header {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 6px; /* تقليص من 10px */
+      gap: 6px;
+      flex-shrink: 0; /* لا يتقلص */
     }
-    .cover-wrapper { width: 90px; height: 90px; } /* تقليص من 110px */
+    .cover-wrapper { width: 90px; height: 90px; flex-shrink: 0; }
     .cover-img {
       width: 100%;
       height: 100%;
@@ -58,10 +68,10 @@
       object-fit: cover;
       border: 3px solid var(--glass-border);
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-      transition: transform 0.5s ease;
     }
     .cover-img.playing { animation: rotateCover 20s linear infinite; }
     @keyframes rotateCover { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
     .track-info { width: 100%; }
     .track-title {
       font-size: 15px;
@@ -73,12 +83,15 @@
       text-overflow: ellipsis;
     }
     .track-artist { font-size: 12px; color: var(--text-muted); margin: 0; }
+
+    .player-controls { flex-shrink: 0; } /* لا يتقلص */
+
     .controls-row {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 24px;
-      margin-top: 0; /* إلغاء margin-top */
+      margin-top: 0;
     }
     .btn-control {
       background: none;
@@ -95,12 +108,13 @@
     .btn-control:active { transform: scale(0.92); }
     .btn-control svg { width: 22px; height: 22px; fill: currentColor; }
     .btn-play-pause {
-      width: 48px; /* تقليص من 52px */
+      width: 48px;
       height: 48px;
       background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
       box-shadow: 0 4px 16px rgba(0, 180, 219, 0.4);
     }
     .btn-play-pause svg { width: 24px; height: 24px; }
+
     .progress-container { width: 100%; display: flex; flex-direction: column; gap: 4px; }
     .progress-bar-wrapper {
       width: 100%;
@@ -128,12 +142,16 @@
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
     }
     .time-indicators { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted); }
+
+    /* ✅ القائمة تأخذ كل المساحة المتبقية تلقائياً بدون JavaScript */
     .playlist-section {
       border-top: 1px solid var(--glass-border);
       padding-top: 8px;
-      max-height: 300px; /* قيمة محسوبة لإظهار 4-5 أغاني */
+      flex: 1;        /* يملأ كل المساحة المتبقية */
       overflow-y: auto;
+      min-height: 0;  /* ضروري لـ flex overflow */
     }
+
     .playlist-title { font-size: 12px; font-weight: bold; color: var(--text-muted); margin: 0 0 6px 0; }
     .playlist-item {
       display: flex;
@@ -205,6 +223,7 @@
       { name: 'يكفيني', artist: 'Khaled Lartiste', url: 'https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/audio/KhaledLartiste.mp3', imgSrc: 'https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/icon/icon/KhaledLartiste.png' },
       { name: 'زهري وين و انا وين', artist: 'Amoune talens', url: 'https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/audio/Amounetalens.mp3', imgSrc: 'https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/icon/icon/Amounetalens.png' }
     ];
+
     const audio = document.getElementById("main-audio");
     const playBtn = document.getElementById("btn-play");
     const playIcon = document.getElementById("play-icon");
@@ -243,6 +262,7 @@
         playlistContainer.appendChild(item);
       });
     }
+
     function loadTrack(index) {
       currentTrackIndex = index;
       const t = audioLinks[index];
@@ -252,6 +272,7 @@
       currentArtist.textContent = t.artist;
       document.querySelectorAll(".playlist-item").forEach((el, i) => el.classList.toggle("active", i === index));
     }
+
     function togglePlay() {
       if (audio.paused) { audio.play().then(() => { isPlaying = true; updatePlayUI(); }); }
       else { audio.pause(); isPlaying = false; updatePlayUI(); }
@@ -264,6 +285,7 @@
     }
     function playNext() { selectTrack((currentTrackIndex + 1) % audioLinks.length); }
     function playPrev() { selectTrack((currentTrackIndex - 1 + audioLinks.length) % audioLinks.length); }
+
     audio.addEventListener("timeupdate", () => {
       if (isNaN(audio.duration)) return;
       progressFilled.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
@@ -278,39 +300,12 @@
       if (isNaN(s)) return "0:00";
       return `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
     }
+
     playBtn.addEventListener("click", togglePlay);
     nextBtn.addEventListener("click", playNext);
     prevBtn.addEventListener("click", playPrev);
     initPlaylist();
     loadTrack(0);
-
-    // ضبط ارتفاع القائمة تلقائياً بناءً على المساحة المتاحة فعلياً
-    function adjustPlaylistHeight() {
-      const card = document.querySelector('.player-card');
-      const playlist = document.querySelector('.playlist-section');
-      const header = document.querySelector('.player-header');
-      const controls = document.querySelector('.player-controls');
-      const plTitle = document.querySelector('.playlist-title');
-      if (!card || !playlist) return;
-      const available = window.innerHeight - card.getBoundingClientRect().top - 80;
-      const usedByOthers = header.offsetHeight + controls.offsetHeight + plTitle.offsetHeight + 60;
-      const newHeight = Math.max(100, available - usedByOthers);
-      playlist.style.maxHeight = newHeight + 'px';
-    }
-
-    function forceFullWidth() {
-      var el = document.querySelector('.player-card');
-      if (!el) return;
-      var parent = el.parentElement;
-      while (parent && parent.tagName !== 'HTML' && parent.tagName !== 'BODY') {
-        parent.style.cssText += 'width:100%!important;max-width:100%!important;margin:0!important;padding:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;border:none!important;';
-        parent = parent.parentElement;
-      }
-    }
-
-    forceFullWidth();
-    window.addEventListener('load', () => { forceFullWidth(); adjustPlaylistHeight(); });
-    window.addEventListener('resize', adjustPlaylistHeight);
   </script>
 </body>
 </html>
