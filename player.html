@@ -16,7 +16,7 @@
     * { box-sizing: border-box; scrollbar-width: none; }
     *::-webkit-scrollbar { display: none; }
 
-    /* ✅ GitHub Pages: ارتفاع ثابت = ارتفاع WebView بالكامل */
+    /* WebView Area */
     html, body {
       margin: 0;
       padding: 0;
@@ -24,7 +24,7 @@
       overflow: hidden;
     }
     body {
-      padding: 12px 12px 24px 12px; /* ✅ إضافة مسافة سفلية 24px للفصل عن الإعلان */
+      padding: 24px 12px 24px 12px; /* مسافة أمان علوية وسفلية */
       font-family: system-ui, -apple-system, sans-serif;
       background: linear-gradient(135deg, #0A1630 0%, #030914 100%);
       color: var(--text-main);
@@ -33,11 +33,11 @@
       align-items: center;
     }
 
-    /* ✅ الكارت يملأ المساحة المتاحة بمرونة ولا يتجاوزها */
+    /* Player Card */
     .player-card {
       width: 100%;
       max-width: 480px;
-      flex: 1; /* ✅ بدلاً من height: 100% لتجنب الالتصاق */
+      flex: 1; 
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -50,6 +50,35 @@
       flex-direction: column;
       gap: 8px;
       overflow: hidden;
+      position: relative; /* ضروري لزر الرجوع */
+    }
+
+    /* زر الرجوع المدمج */
+    .btn-back {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--glass-border);
+      color: var(--text-main);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      z-index: 10;
+    }
+    .btn-back:hover, .btn-back:active {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(0.95);
+    }
+    .btn-back svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
     }
 
     .player-header {
@@ -58,7 +87,8 @@
       align-items: center;
       text-align: center;
       gap: 6px;
-      flex-shrink: 0; /* لا يتقلص */
+      flex-shrink: 0;
+      margin-top: 10px; /* مسافة لزر الرجوع */
     }
     .cover-wrapper { width: 90px; height: 90px; flex-shrink: 0; }
     .cover-img {
@@ -84,7 +114,7 @@
     }
     .track-artist { font-size: 12px; color: var(--text-muted); margin: 0; }
 
-    .player-controls { flex-shrink: 0; } /* لا يتقلص */
+    .player-controls { flex-shrink: 0; }
 
     .controls-row {
       display: flex;
@@ -143,13 +173,12 @@
     }
     .time-indicators { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted); }
 
-    /* ✅ القائمة تأخذ كل المساحة المتبقية تلقائياً بدون JavaScript */
     .playlist-section {
       border-top: 1px solid var(--glass-border);
       padding-top: 8px;
-      flex: 1;        /* يملأ كل المساحة المتبقية */
+      flex: 1;
       overflow-y: auto;
-      min-height: 0;  /* ضروري لـ flex overflow */
+      min-height: 0;
     }
 
     .playlist-title { font-size: 12px; font-weight: bold; color: var(--text-muted); margin: 0 0 6px 0; }
@@ -174,6 +203,13 @@
 </head>
 <body>
   <div class="player-card">
+    
+    <!-- زر الرجوع -->
+    <button class="btn-back" onclick="window.location.href='app://close'" title="رجوع">
+      <!-- أيقونة سهم يمين (لأن الواجهة عربية RTL) -->
+      <svg viewBox="0 0 24 24"><path d="M4 11h12.17l-5.59-5.59L12 4l8 8-8 8-1.41-1.41L16.17 13H4v-2z"/></svg>
+    </button>
+
     <div class="player-header">
       <div class="cover-wrapper">
         <img id="track-cover" class="cover-img" src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/music-icon-mohammed-jabir-ap.jpg" alt="غلاف الأغنية">
