@@ -1,0 +1,50 @@
+[
+  {
+    "name": "عندك تنعس",
+    "artist": "DjamelSghir",
+    "url": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/audio/DjamelSghir.mp3",
+    "imgSrc": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/icon/icon/djamelsghir.png"
+  },
+  {
+    "name": "عشقتها وعشقتني",
+    "artist": "ALiMadjadji",
+    "url": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/audio/Madjadji.mp3",
+    "imgSrc": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/icon/icon/Madjadji.png"
+  },
+  {
+    "name": "جيبي دواء الكريمة",
+    "artist": "chayeb",
+    "url": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/audio/chayeb.mp3",
+    "imgSrc": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/icon/icon/chayeb.png"
+  },
+  {
+    "name": "يا دوري دڨ دڨ",
+    "artist": "Cheb Aissa",
+    "url": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/audio/ChebAissa.mp3",
+    "imgSrc": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/icon/icon/ChebAissa.png"
+  },
+  {
+    "name": "الى لقيته جيبه ورواح",
+    "artist": "Zakaria Mounji",
+    "url": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/audio/ZakariaMounji.mp3",
+    "imgSrc": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/icon/icon/ZakariaMounji.png"
+  },
+  {
+    "name": "طفلة مالك",
+    "artist": "cherif oueldsaber",
+    "url": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/audio/cherifoueldsaber.mp3",
+    "imgSrc": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/icon/icon/cherifoueldsaber.png"
+  },
+  {
+    "name": "يكفيني",
+    "artist": "Khaled Lartiste",
+    "url": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/audio/KhaledLartiste.mp3",
+    "imgSrc": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/icon/icon/KhaledLartiste.png"
+  },
+  {
+    "name": "زهري وين و انا وين",
+    "artist": "Amoune talens",
+    "url": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/audio/Amounetalens.mp3",
+    "imgSrc": "https://cdn.jsdelivr.net/gh/saidroma22/app-Azzadine@main/icon/icon/Amounetalens.png"
+  }
+]
